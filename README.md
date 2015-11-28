@@ -1,2 +1,2 @@
 # projecthermes
-Serverless infrastructure driven  project.
+Flask application.
