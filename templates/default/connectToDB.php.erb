@@ -1,0 +1,10 @@
+<?php
+
+try {
+	$db = new PDO ('mysql:host=<%= @connect %>;dbname=hermes;charset=utf8','<%= @user %>', '<%= @userid %>');
+
+	}
+	catch( PDOException $Exception ) {
+		die("The database was unable to establish a connection");
+ }
+?>

@@ -1,0 +1,21 @@
+---
+driver:
+  name: vagrant
+  network:
+  - ['forwarded_port' , {guest: 80, host: 80}]
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7.1
+
+suites:
+  - name: default
+    data_bags_path: './../../data_bags/'
+    encrypted_data_bag_secret_key_path: './../../encrypted_data_bag_secret'
+    run_list:
+      - recipe[projecthermes::default]
+    attributes:
+      projecthermes:
+        servername: 'localhost'
