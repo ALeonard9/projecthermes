@@ -28,7 +28,7 @@ execute 'add rpm2' do
   not_if { ::File.exist?('/etc/yum.repos.d/webtatic.repo') }
 end
 
-packages = ['php55w', 'php55w-mysql', 'php55w-pdo', 'php55w-mcrypt', 'mariadb', 'unzip']
+packages = ['php55w', 'php55w-mysql', 'php55w-pdo', 'php55w-mcrypt', 'php55w-mbstring', 'mariadb', 'unzip']
 
 packages.each do |pkg|
   package pkg
@@ -46,6 +46,13 @@ template '/var/www/cgi-bin/connectToDB.php' do
   variables(connect: item_data['connection_string'],
             user: item_data['user'],
             userid: item_data['userid']
+           )
+end
+template '/var/www/cgi-bin/checkout/config.php' do
+  source 'config.php.erb'
+  mode '0644'
+  variables(stripe_sk: item_data['stripe_sk'],
+            stripe_pk: item_data['stripe_pk']
            )
 end
 

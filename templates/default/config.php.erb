@@ -1,0 +1,10 @@
+<?php
+require_once('../composer/vendor/autoload.php');
+
+$stripe = array(
+  "secret_key"      => "<%= @stripe_sk %>",
+  "publishable_key" => "<%= @stripe_pk %>"
+);
+
+\Stripe\Stripe::setApiKey($stripe['secret_key']);
+?>
