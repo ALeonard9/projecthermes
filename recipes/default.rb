@@ -48,13 +48,6 @@ template '/var/www/cgi-bin/connectToDB.php' do
             userid: item_data['userid']
            )
 end
-template '/var/www/cgi-bin/checkout/config.php' do
-  source 'config.php.erb'
-  mode '0644'
-  variables(stripe_sk: item_data['stripe_sk'],
-            stripe_pk: item_data['stripe_pk']
-           )
-end
 
 remote_file "#{Chef::Config[:file_cache_path]}/projecthermes-src.zip" do
   source 'https://s3.amazonaws.com/leoninestudios/projecthermes/projecthermes-src.zip'
@@ -64,6 +57,14 @@ end
 
 execute 'unzip_source' do
   command "unzip -o -u #{Chef::Config[:file_cache_path]}/projecthermes-src.zip -d /var/www/"
+end
+
+template '/var/www/cgi-bin/checkout/config.php' do
+  source 'config.php.erb'
+  mode '0644'
+  variables(stripe_sk: item_data['stripe_sk'],
+            stripe_pk: item_data['stripe_pk']
+           )
 end
 
 execute 'download composer' do
