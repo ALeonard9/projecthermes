@@ -1,2 +1,2 @@
-# projecthermes
-Flask application.
+# a work in progress...
+UNDER CONSTRUCTION
